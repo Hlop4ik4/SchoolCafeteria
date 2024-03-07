@@ -14,7 +14,7 @@ namespace SchoolCafeteriaDatabaseImplement
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=BEST-KOMP\SQLEXPRESS;Initial Catalog=SchoolCafeteria;Integrated Security=True;MultipleActiveResultSets=True;TrustServerCertificate=True");
+                optionsBuilder.UseSqlServer(@"Data Source=KUGA\SQLEXPRESS;Initial Catalog=SchoolCafeteria;Integrated Security=True;MultipleActiveResultSets=True;TrustServerCertificate=True");
             }
             base.OnConfiguring(optionsBuilder);
         }
