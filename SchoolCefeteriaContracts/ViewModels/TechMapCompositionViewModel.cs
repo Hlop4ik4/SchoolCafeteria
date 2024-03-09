@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolCafeteriaDatabaseImplement.Models
+namespace SchoolCefeteriaContracts.ViewModels
 {
-    public class GoodsComposition
+    public class TechMapCompositionViewModel
     {
         public int Id { get; set; }
 
-        public int GoodsId { get; set; }
+        public int TechnologicalMapId { get; set; }
 
         public decimal Protein { get; set; }
 
@@ -33,7 +33,5 @@ namespace SchoolCafeteriaDatabaseImplement.Models
         public decimal Mg { get; set; }
 
         public decimal Fe { get; set; }
-
-        public virtual Goods Goods { get; set; }
     }
 }

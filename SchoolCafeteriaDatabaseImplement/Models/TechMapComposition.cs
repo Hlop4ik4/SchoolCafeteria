@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SchoolCafeteriaDatabaseImplement.Models
 {
-    public class GoodsComposition
+    public class TechMapComposition
     {
         public int Id { get; set; }
 
-        public int GoodsId { get; set; }
+        public int TechnologicalMapId { get; set; }
 
         public decimal Protein { get; set; }
 
@@ -34,6 +34,6 @@ namespace SchoolCafeteriaDatabaseImplement.Models
 
         public decimal Fe { get; set; }
 
-        public virtual Goods Goods { get; set; }
+        public virtual TechnologicalMap TechnologicalMap { get; set; }
     }
 }

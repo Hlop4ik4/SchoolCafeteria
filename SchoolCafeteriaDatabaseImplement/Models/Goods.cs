@@ -24,9 +24,6 @@ namespace SchoolCafeteriaDatabaseImplement.Models
         public bool MarkToDelete { get; set; }
 
         [ForeignKey("GoodsId")]
-        public virtual GoodsComposition GoodsComposition { get; set; }
-
-        [ForeignKey("GoodsId")]
         public virtual List<TechMapGoods> TechMapGoods { get; set; }
     }
 }

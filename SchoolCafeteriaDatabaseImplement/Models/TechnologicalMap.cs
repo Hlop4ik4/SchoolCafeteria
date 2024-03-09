@@ -23,9 +23,6 @@ namespace SchoolCafeteriaDatabaseImplement.Models
         public string Description { get; set; }
 
         [ForeignKey("TechMapId")]
-        public virtual GoodsComposition GoodsComposition { get; set; }
-
-        [ForeignKey("TechMapId")]
         public virtual List<TechMapGoods> TechMapGoods { get; set; }
     }
 }

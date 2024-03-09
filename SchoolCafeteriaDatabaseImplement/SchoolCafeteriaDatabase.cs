@@ -14,7 +14,7 @@ namespace SchoolCafeteriaDatabaseImplement
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=KUGA\SQLEXPRESS;Initial Catalog=SchoolCafeteria;Integrated Security=True;MultipleActiveResultSets=True;TrustServerCertificate=True");
+                optionsBuilder.UseSqlServer(@"Data Source=BEST-KOMP\SQLEXPRESS;Initial Catalog=SchoolCafeteria;Integrated Security=True;MultipleActiveResultSets=True;TrustServerCertificate=True");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -22,6 +22,8 @@ namespace SchoolCafeteriaDatabaseImplement
         public virtual DbSet<Goods> Goods { get; set; }
 
         public virtual DbSet<GoodsComposition> GoodsCompositions { get; set; }
+
+        public virtual DbSet<TechMapComposition> TechMapCompositions { get; set; }
 
         public virtual DbSet<TechMapGoods> TechMapGoods { get; set; }
 

@@ -73,7 +73,6 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
             {
                 Id = goodsComposition.Id,
                 GoodsId = goodsComposition.GoodsId,
-                TechMapId = goodsComposition.TechMapId,
                 Protein = goodsComposition.Protein,
                 Fat = goodsComposition.Fat,
                 Carb = goodsComposition.Carb,
@@ -91,7 +90,6 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
         private static GoodsComposition CreateModel(GoodsCompositionViewModel model, GoodsComposition goodsComposition)
         {
             goodsComposition.GoodsId = model.GoodsId;
-            goodsComposition.TechMapId = model.TechMapId;
             goodsComposition.Protein = model.Protein;
             goodsComposition.Fat = model.Fat;
             goodsComposition.Carb = model.Carb;

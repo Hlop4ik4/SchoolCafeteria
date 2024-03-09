@@ -4,9 +4,7 @@
     {
         public int Id { get; set; }
 
-        public int? GoodsId { get; set; }
-
-        public int? TechMapId { get; set; }
+        public int GoodsId { get; set; }
 
         public decimal Protein { get; set; }
 
