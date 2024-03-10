@@ -117,6 +117,11 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
                 context.TechMapGoods.RemoveRange(techMapGoods.Where(rec =>
                 !model.TechMapGoods.Contains(rec.GoodsId)).ToList());
                 context.SaveChanges();
+                foreach (var techMapGood in techMapGoods)
+                {
+                    model.TechMapGoods.Remove(techMapGood.GoodsId);
+                }
+                context.SaveChanges();
             }
             foreach (var tg in model.TechMapGoods)
             {

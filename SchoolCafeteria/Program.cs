@@ -18,7 +18,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/GetUsers", () =>
+app.MapGet("/Users/Get", () =>
 {
     var userStorage = new UserStorage();
     var list = userStorage.GetFullList();
@@ -28,7 +28,7 @@ app.MapGet("/GetUsers", () =>
     .WithName("UserList")
     .WithOpenApi();
 
-app.MapPost("/CreateUser", (UserViewModel request) =>
+app.MapPost("/Users/Create", (UserViewModel request) =>
 {
     var userStorage = new UserStorage();
 
@@ -39,7 +39,18 @@ app.MapPost("/CreateUser", (UserViewModel request) =>
     .WithName("CreateUser")
     .WithOpenApi();
 
-app.MapPost("/DeleteUser", (int id) =>
+app.MapPatch("/Users/Update", (UserViewModel request) =>
+{
+    var userStorage = new UserStorage();
+
+    userStorage.Update(request);
+
+    return Results.Ok();
+})
+    .WithName("UpdateUser")
+    .WithOpenApi();
+
+app.MapPost("/Users/Delete", (int id) =>
 {
     var userStorage = new UserStorage();
 
@@ -50,7 +61,7 @@ app.MapPost("/DeleteUser", (int id) =>
     .WithName("DeleteUser")
     .WithOpenApi();
 
-app.MapGet("/GetGoods", () =>
+app.MapGet("/Goods/Get", () =>
 {
     var goodsStorage = new GoodsStorage();
     var list = goodsStorage.GetFullList();
@@ -60,7 +71,7 @@ app.MapGet("/GetGoods", () =>
     .WithName("GoodsList")
     .WithOpenApi();
 
-app.MapPost("/CreateGoods", (GoodsViewModel request) =>
+app.MapPost("/Goods/Create", (GoodsViewModel request) =>
 {
     var goodsStorage = new GoodsStorage();
 
@@ -71,7 +82,18 @@ app.MapPost("/CreateGoods", (GoodsViewModel request) =>
     .WithName("CreateGoods")
     .WithOpenApi();
 
-app.MapPost("/DeleteGoods", (int id) =>
+app.MapPatch("/Goods/Update", (GoodsViewModel request) =>
+{
+    var goodsStorage = new GoodsStorage();
+
+    goodsStorage.Update(request);
+
+    return Results.Ok();
+})
+    .WithName("UpdateGoods")
+    .WithOpenApi();
+
+app.MapPost("/Goods/Delete", (int id) =>
 {
     var goodsStorage = new GoodsStorage();
 
@@ -82,7 +104,7 @@ app.MapPost("/DeleteGoods", (int id) =>
     .WithName("DeleteGoods")
     .WithOpenApi();
 
-app.MapGet("/GetGoodsComposition", () =>
+app.MapGet("/GoodsComposition/Get", () =>
 {
     var goodsCompositionStorage = new GoodsCompositionStorage();
     var list = goodsCompositionStorage.GetFullList();
@@ -92,7 +114,7 @@ app.MapGet("/GetGoodsComposition", () =>
     .WithName("GoodsCompositionList")
     .WithOpenApi();
 
-app.MapPost("/CreateGoodsComposition", (GoodsCompositionViewModel request) =>
+app.MapPost("/GoodsComposition/Create", (GoodsCompositionViewModel request) =>
 {
     var goodsCompositionStorage = new GoodsCompositionStorage();
 
@@ -103,7 +125,18 @@ app.MapPost("/CreateGoodsComposition", (GoodsCompositionViewModel request) =>
     .WithName("CreateGoodsComposition")
     .WithOpenApi();
 
-app.MapPost("/DeleteGoodsComposition", (int id) =>
+app.MapPatch("/GoodsComposition/Update", (GoodsCompositionViewModel request) =>
+{
+    var goodsCompositionStorage = new GoodsCompositionStorage();
+
+    goodsCompositionStorage.Update(request);
+
+    return Results.Ok();
+})
+    .WithName("UpdateGoodsComposition")
+    .WithOpenApi();
+
+app.MapPost("/GoodsComposition/Delete", (int id) =>
 {
     var goodsCompositionStorage = new GoodsCompositionStorage();
 
@@ -114,7 +147,7 @@ app.MapPost("/DeleteGoodsComposition", (int id) =>
     .WithName("DeleteGoodsComposition")
     .WithOpenApi();
 
-app.MapGet("/GetTechMapComposition", () =>
+app.MapGet("/TechMapComposition/Get", () =>
 {
     var techMapCompositionStorage = new TechMapCompositionStorage();
     var list = techMapCompositionStorage.GetFullList();
@@ -124,7 +157,7 @@ app.MapGet("/GetTechMapComposition", () =>
     .WithName("TechMapCompositionList")
     .WithOpenApi();
 
-app.MapPost("/CreateTechMapComposition", (TechMapCompositionViewModel request) =>
+app.MapPost("/TechMapComposition/Create", (TechMapCompositionViewModel request) =>
 {
     var techMapCompositionStorage = new TechMapCompositionStorage();
 
@@ -135,7 +168,18 @@ app.MapPost("/CreateTechMapComposition", (TechMapCompositionViewModel request) =
     .WithName("CreateTechMapComposition")
     .WithOpenApi();
 
-app.MapPost("/DeleteTechMapComposition", (int id) =>
+app.MapPatch("/TechMapComposition/Update", (TechMapCompositionViewModel request) =>
+{
+    var techMapCompositionStorage = new TechMapCompositionStorage();
+
+    techMapCompositionStorage.Update(request);
+
+    return Results.Ok();
+})
+    .WithName("UpdateTechMapComposition")
+    .WithOpenApi();
+
+app.MapPost("/TechMapComposition/Delete", (int id) =>
 {
     var techMapCompositionStorage = new TechMapCompositionStorage();
 
@@ -144,6 +188,49 @@ app.MapPost("/DeleteTechMapComposition", (int id) =>
     return Results.Ok();
 })
     .WithName("DeleteTechMapComposition")
+    .WithOpenApi();
+
+app.MapGet("/TechnologicalMaps/Get", () =>
+{
+    var technologicalMapStorage = new TechnologicalMapStorage();
+    var list = technologicalMapStorage.GetFullList();
+
+    return Results.Ok(list);
+})
+    .WithName("TechnologicalMapList")
+    .WithOpenApi();
+
+app.MapPost("/TechnologicalMap/Create", (TechnologicalMapViewModel request) =>
+{
+    var technologicalMapStorage = new TechnologicalMapStorage();
+
+    technologicalMapStorage.Insert(request);
+
+    return Results.Ok();
+})
+    .WithName("CreateTechnologicalMap")
+    .WithOpenApi();
+
+app.MapPatch("/TechnologicalMap/Update", (TechnologicalMapViewModel request) =>
+{
+    var technologicalMapStorage = new TechnologicalMapStorage();
+
+    technologicalMapStorage.Update(request);
+
+    return Results.Ok();
+})
+    .WithName("UpdateTechnologicalMap")
+    .WithOpenApi();
+
+app.MapPost("/TechnologicalMap/Delete", (int id) =>
+{
+    var technologicalMapStorage = new TechnologicalMapStorage();
+
+    technologicalMapStorage.Delete(id);
+
+    return Results.Ok();
+})
+    .WithName("DeleteTechnologicalMap")
     .WithOpenApi();
 
 app.Run();
