@@ -46,7 +46,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
             }
 
             using var context = new SchoolCafeteriaDatabase();
-            var goodsComposition = context.GoodsCompositions.FirstOrDefault(gc => gc.Id == model.Id);
+            var goodsComposition = context.GoodsCompositions.FirstOrDefault(gc => gc.Id == Convert.ToInt32(model.Id));
             if (goodsComposition == null)
             {
                 throw new Exception("Элемент не найден");
@@ -71,36 +71,36 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
         {
             return new GoodsCompositionViewModel
             {
-                Id = goodsComposition.Id,
-                GoodsId = goodsComposition.GoodsId,
-                Protein = goodsComposition.Protein,
-                Fat = goodsComposition.Fat,
-                Carb = goodsComposition.Carb,
-                B1 = goodsComposition.B1,
-                C = goodsComposition.C,
-                A = goodsComposition.A,
-                E = goodsComposition.E,
-                Ca = goodsComposition.Ca,
-                P = goodsComposition.P,
-                Mg = goodsComposition.Mg,
-                Fe = goodsComposition.Fe
+                Id = Convert.ToString(goodsComposition.Id),
+                GoodsId = Convert.ToString(goodsComposition.GoodsId),
+                Protein = Convert.ToString(goodsComposition.Protein),
+                Fat = Convert.ToString(goodsComposition.Fat),
+                Carb = Convert.ToString(goodsComposition.Carb),
+                B1 = Convert.ToString(goodsComposition.B1),
+                C = Convert.ToString(goodsComposition.C),
+                A = Convert.ToString(goodsComposition.A),
+                E = Convert.ToString(goodsComposition.E),
+                Ca = Convert.ToString(goodsComposition.Ca),
+                P = Convert.ToString(goodsComposition.P),
+                Mg = Convert.ToString(goodsComposition.Mg),
+                Fe = Convert.ToString(goodsComposition.Fe)
             };
         }
 
         private static GoodsComposition CreateModel(GoodsCompositionViewModel model, GoodsComposition goodsComposition)
         {
-            goodsComposition.GoodsId = model.GoodsId;
-            goodsComposition.Protein = model.Protein;
-            goodsComposition.Fat = model.Fat;
-            goodsComposition.Carb = model.Carb;
-            goodsComposition.B1 = model.B1;
-            goodsComposition.C = model.C;
-            goodsComposition.A = model.A;
-            goodsComposition.E = model.E;
-            goodsComposition.Ca = model.Ca;
-            goodsComposition.P = model.P;
-            goodsComposition.Mg = model.Mg;
-            goodsComposition.Fe = model.Fe;
+            goodsComposition.GoodsId = Convert.ToInt32(model.GoodsId);
+            goodsComposition.Protein = Convert.ToDecimal(model.Protein);
+            goodsComposition.Fat = Convert.ToDecimal(model.Fat);
+            goodsComposition.Carb = Convert.ToDecimal(model.Carb);
+            goodsComposition.B1 = Convert.ToDecimal(model.B1);
+            goodsComposition.C = Convert.ToDecimal(model.C);
+            goodsComposition.A = Convert.ToDecimal(model.A);
+            goodsComposition.E = Convert.ToDecimal(model.E);
+            goodsComposition.Ca = Convert.ToDecimal(model.Ca);
+            goodsComposition.P = Convert.ToDecimal(model.P);
+            goodsComposition.Mg = Convert.ToDecimal(model.Mg);
+            goodsComposition.Fe = Convert.ToDecimal(model.Fe);
             return goodsComposition;
         }
     }

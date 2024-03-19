@@ -2,14 +2,14 @@
 {
     public class GoodsViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
-        public int BruttoMass { get; set; }
+        public string BruttoMass { get; set; }
 
-        public int NettoMass { get; set; }
+        public string NettoMass { get; set; }
 
-        public bool MarkToDelete { get; set; }
+        public string MarkToDelete { get; set; }
     }
 }

@@ -46,7 +46,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
             }
 
             using var context = new SchoolCafeteriaDatabase();
-            var goods = context.Goods.FirstOrDefault(g => g.Id == model.Id);
+            var goods = context.Goods.FirstOrDefault(g => g.Id == Convert.ToInt32(model.Id));
             if (goods == null)
             {
                 throw new Exception("Элемент не найден");
@@ -71,20 +71,20 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
         {
             return new GoodsViewModel
             {
-                Id = goods.Id,
+                Id = Convert.ToString(goods.Id),
                 Name = goods.Name,
-                BruttoMass = goods.BruttoMass,
-                NettoMass = goods.NettoMass,
-                MarkToDelete = goods.MarkToDelete
+                BruttoMass = Convert.ToString(goods.BruttoMass),
+                NettoMass = Convert.ToString(goods.NettoMass),
+                MarkToDelete = Convert.ToString(goods.MarkToDelete)
             };
         }
 
         private static Goods CreateModel(GoodsViewModel model, Goods goods)
         {
             goods.Name = model.Name;
-            goods.BruttoMass = model.BruttoMass;
-            goods.NettoMass = model.NettoMass;
-            goods.MarkToDelete = model.MarkToDelete;
+            goods.BruttoMass = Convert.ToInt32(model.BruttoMass);
+            goods.NettoMass = Convert.ToInt32(model.NettoMass);
+            goods.MarkToDelete = Convert.ToBoolean(model.MarkToDelete);
             return goods;
         }
     }

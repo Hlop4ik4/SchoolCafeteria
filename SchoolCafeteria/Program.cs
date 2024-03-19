@@ -4,6 +4,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using SchoolCefeteriaContracts.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,11 +64,13 @@ app.MapPatch("/Users/Update", (UserViewModel request) =>
     .WithName("UpdateUser")
     .WithOpenApi();
 
-app.MapPost("/Users/Delete", (int id) =>
+app.MapPost("/Users/Delete", (UserViewModel request) =>
 {
+    int idInt = Convert.ToInt32(request.Id);
+
     var userStorage = new UserStorage();
 
-    userStorage.Delete(id);
+    userStorage.Delete(idInt);
 
     return Results.Ok();
 })
@@ -106,11 +109,13 @@ app.MapPatch("/Goods/Update", (GoodsViewModel request) =>
     .WithName("UpdateGoods")
     .WithOpenApi();
 
-app.MapPost("/Goods/Delete", (int id) =>
+app.MapPost("/Goods/Delete", (GoodsViewModel request) =>
 {
+    int idInt = Convert.ToInt32(request.Id);
+
     var goodsStorage = new GoodsStorage();
 
-    goodsStorage.Delete(id);
+    goodsStorage.Delete(idInt);
 
     return Results.Ok();
 })
@@ -149,11 +154,13 @@ app.MapPatch("/GoodsComposition/Update", (GoodsCompositionViewModel request) =>
     .WithName("UpdateGoodsComposition")
     .WithOpenApi();
 
-app.MapPost("/GoodsComposition/Delete", (int id) =>
+app.MapPost("/GoodsComposition/Delete", (GoodsCompositionViewModel request) =>
 {
+    int idInt = Convert.ToInt32(request.Id);
+
     var goodsCompositionStorage = new GoodsCompositionStorage();
 
-    goodsCompositionStorage.Delete(id);
+    goodsCompositionStorage.Delete(idInt);
 
     return Results.Ok();
 })
@@ -192,11 +199,13 @@ app.MapPatch("/TechMapComposition/Update", (TechMapCompositionViewModel request)
     .WithName("UpdateTechMapComposition")
     .WithOpenApi();
 
-app.MapPost("/TechMapComposition/Delete", (int id) =>
+app.MapPost("/TechMapComposition/Delete", (TechMapCompositionViewModel request) =>
 {
+    int idInt = Convert.ToInt32(request.Id);
+
     var techMapCompositionStorage = new TechMapCompositionStorage();
 
-    techMapCompositionStorage.Delete(id);
+    techMapCompositionStorage.Delete(idInt);
 
     return Results.Ok();
 })
@@ -213,7 +222,7 @@ app.MapGet("/TechnologicalMaps/Get", () =>
     .WithName("TechnologicalMapList")
     .WithOpenApi();
 
-app.MapPost("/TechnologicalMap/Create", (TechnologicalMapViewModel request) =>
+app.MapPost("/TechnologicalMaps/Create", (TechnologicalMapViewModel request) =>
 {
     var technologicalMapStorage = new TechnologicalMapStorage();
 
@@ -224,7 +233,7 @@ app.MapPost("/TechnologicalMap/Create", (TechnologicalMapViewModel request) =>
     .WithName("CreateTechnologicalMap")
     .WithOpenApi();
 
-app.MapPatch("/TechnologicalMap/Update", (TechnologicalMapViewModel request) =>
+app.MapPatch("/TechnologicalMaps/Update", (TechnologicalMapViewModel request) =>
 {
     var technologicalMapStorage = new TechnologicalMapStorage();
 
@@ -235,11 +244,13 @@ app.MapPatch("/TechnologicalMap/Update", (TechnologicalMapViewModel request) =>
     .WithName("UpdateTechnologicalMap")
     .WithOpenApi();
 
-app.MapPost("/TechnologicalMap/Delete", (int id) =>
+app.MapPost("/TechnologicalMaps/Delete", (TechnologicalMapViewModel request) =>
 {
+    int idInt = Convert.ToInt32(request.Id);
+
     var technologicalMapStorage = new TechnologicalMapStorage();
 
-    technologicalMapStorage.Delete(id);
+    technologicalMapStorage.Delete(idInt);
 
     return Results.Ok();
 })

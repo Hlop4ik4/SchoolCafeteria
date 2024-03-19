@@ -42,7 +42,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
                 var techMap = new TechnologicalMap
                 {
                     DishName = model.DishName,
-                    RecipeNumber = model.RecipeNumber,
+                    RecipeNumber = Convert.ToInt32(model.RecipeNumber),
                     CookingTechnology = model.CookingTechnology,
                     Description = model.Description
                 };
@@ -66,14 +66,13 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                var element = context.TechnologicalMaps.FirstOrDefault(rec => rec.Id ==
-                model.Id);
+                var element = context.TechnologicalMaps.FirstOrDefault(rec => rec.Id == Convert.ToInt32(model.Id));
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
                 element.DishName = model.DishName;
-                element.RecipeNumber = model.RecipeNumber;
+                element.RecipeNumber = Convert.ToInt32(model.RecipeNumber);
                 element.CookingTechnology = model.CookingTechnology;
                 element.Description = model.Description;
 
@@ -106,20 +105,20 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
         public static TechnologicalMap CreateModel(TechnologicalMapViewModel model, TechnologicalMap techMap, SchoolCafeteriaDatabase context)
         {
             techMap.DishName = model.DishName;
-            techMap.RecipeNumber = model.RecipeNumber;
+            techMap.RecipeNumber = Convert.ToInt32(model.RecipeNumber);
             techMap.CookingTechnology = model.CookingTechnology;
             techMap.Description = model.Description;
 
-            if (model.Id.HasValue)
+            if (string.IsNullOrEmpty(model.Id))
             {
                 var techMapGoods = context.TechMapGoods.Where(rec =>
-                rec.TechMapId == model.Id.Value).ToList();
+                rec.TechMapId == Convert.ToInt32(model.Id)).ToList();
                 context.TechMapGoods.RemoveRange(techMapGoods.Where(rec =>
-                !model.TechMapGoods.Contains(rec.GoodsId)).ToList());
+                !model.TechMapGoods.Contains(Convert.ToString(rec.GoodsId))).ToList());
                 context.SaveChanges();
                 foreach (var techMapGood in techMapGoods)
                 {
-                    model.TechMapGoods.Remove(techMapGood.GoodsId);
+                    model.TechMapGoods.Remove(Convert.ToString(techMapGood.GoodsId));
                 }
                 context.SaveChanges();
             }
@@ -128,7 +127,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
                 context.TechMapGoods.Add(new TechMapGoods
                 {
                     TechMapId = techMap.Id,
-                    GoodsId = tg
+                    GoodsId = Convert.ToInt32(tg)
                 });
                 context.SaveChanges();
             }
@@ -137,16 +136,16 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
 
         private static TechnologicalMapViewModel CreateModel(TechnologicalMap techMap)
         {
-            var list = new List<int>();
+            var list = new List<string>();
             foreach(var techMapGoods in techMap.TechMapGoods)
             {
-                list.Add(techMapGoods.GoodsId);
+                list.Add(Convert.ToString(techMapGoods.GoodsId));
             }
             return new TechnologicalMapViewModel
             {
-                Id = techMap.Id,
+                Id = Convert.ToString(techMap.Id),
                 DishName = techMap.DishName,
-                RecipeNumber = techMap.RecipeNumber,
+                RecipeNumber = Convert.ToString(techMap.RecipeNumber),
                 CookingTechnology = techMap.CookingTechnology,
                 Description = techMap.Description,
                 TechMapGoods = list

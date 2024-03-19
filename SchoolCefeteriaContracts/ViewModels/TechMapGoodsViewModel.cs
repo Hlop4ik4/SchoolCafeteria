@@ -2,10 +2,10 @@
 {
     public class TechMapGoodsViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
-        public int TechMapId { get; set; }
+        public string TechMapId { get; set; }
 
-        public int GoodsId { get; set; }
+        public string GoodsId { get; set; }
     }
 }

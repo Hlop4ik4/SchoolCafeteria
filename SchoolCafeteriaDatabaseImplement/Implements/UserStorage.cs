@@ -46,7 +46,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
             }
 
             using var context = new SchoolCafeteriaDatabase();
-            var user = context.Users.FirstOrDefault(u => u.Id == model.Id);
+            var user = context.Users.FirstOrDefault(u => u.Id == Convert.ToInt32(model.Id));
             if (user == null)
             {
                 throw new Exception("Элемент не найден");
@@ -71,7 +71,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
         {
             return new UserViewModel
             {
-                Id = user.Id,
+                Id = Convert.ToString(user.Id),
                 Login = user.Login,
                 Password = user.Password,
                 FullName = user.FullName

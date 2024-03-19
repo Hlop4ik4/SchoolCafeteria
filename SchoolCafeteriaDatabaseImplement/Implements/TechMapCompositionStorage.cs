@@ -47,7 +47,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
             }
 
             using var context = new SchoolCafeteriaDatabase();
-            var techMapComposition = context.TechMapCompositions.FirstOrDefault(gc => gc.Id == model.Id);
+            var techMapComposition = context.TechMapCompositions.FirstOrDefault(gc => gc.Id == Convert.ToInt32(model.Id));
             if (techMapComposition == null)
             {
                 throw new Exception("Элемент не найден");
@@ -72,36 +72,36 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
         {
             return new TechMapCompositionViewModel
             {
-                Id = techMapComposition.Id,
-                TechnologicalMapId = techMapComposition.TechnologicalMapId,
-                Protein = techMapComposition.Protein,
-                Fat = techMapComposition.Fat,
-                Carb = techMapComposition.Carb,
-                B1 = techMapComposition.B1,
-                C = techMapComposition.C,
-                A = techMapComposition.A,
-                E = techMapComposition.E,
-                Ca = techMapComposition.Ca,
-                P = techMapComposition.P,
-                Mg = techMapComposition.Mg,
-                Fe = techMapComposition.Fe
+                Id = Convert.ToString(techMapComposition.Id),
+                TechnologicalMapId = Convert.ToString(techMapComposition.TechnologicalMapId),
+                Protein = Convert.ToString(techMapComposition.Protein),
+                Fat = Convert.ToString(techMapComposition.Fat),
+                Carb = Convert.ToString(techMapComposition.Carb),
+                B1 = Convert.ToString(techMapComposition.B1),
+                C = Convert.ToString(techMapComposition.C),
+                A = Convert.ToString(techMapComposition.A),
+                E = Convert.ToString(techMapComposition.E),
+                Ca = Convert.ToString(techMapComposition.Ca),
+                P = Convert.ToString(techMapComposition.P),
+                Mg = Convert.ToString(techMapComposition.Mg),
+                Fe = Convert.ToString(techMapComposition.Fe)
             };
         }
 
         private static TechMapComposition CreateModel(TechMapCompositionViewModel model, TechMapComposition techMapComposition)
         {
-            techMapComposition.TechnologicalMapId = model.TechnologicalMapId;
-            techMapComposition.Protein = model.Protein;
-            techMapComposition.Fat = model.Fat;
-            techMapComposition.Carb = model.Carb;
-            techMapComposition.B1 = model.B1;
-            techMapComposition.C = model.C;
-            techMapComposition.A = model.A;
-            techMapComposition.E = model.E;
-            techMapComposition.Ca = model.Ca;
-            techMapComposition.P = model.P;
-            techMapComposition.Mg = model.Mg;
-            techMapComposition.Fe = model.Fe;
+            techMapComposition.TechnologicalMapId = Convert.ToInt32(model.TechnologicalMapId);
+            techMapComposition.Protein = Convert.ToDecimal(model.Protein);
+            techMapComposition.Fat = Convert.ToDecimal(model.Fat);
+            techMapComposition.Carb = Convert.ToDecimal(model.Carb);
+            techMapComposition.B1 = Convert.ToDecimal(model.B1);
+            techMapComposition.C = Convert.ToDecimal(model.C);
+            techMapComposition.A = Convert.ToDecimal(model.A);
+            techMapComposition.E = Convert.ToDecimal(model.E);
+            techMapComposition.Ca = Convert.ToDecimal(model.Ca);
+            techMapComposition.P = Convert.ToDecimal(model.P);
+            techMapComposition.Mg = Convert.ToDecimal(model.Mg);
+            techMapComposition.Fe = Convert.ToDecimal(model.Fe);
 
             return techMapComposition;
         }
