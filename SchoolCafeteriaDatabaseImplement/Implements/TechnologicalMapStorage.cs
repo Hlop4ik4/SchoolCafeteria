@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using SchoolCafeteriaContracts.ViewModels;
 using SchoolCafeteriaDatabaseImplement.Models;
+using SchoolCefeteriaContracts.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +39,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
         {
             using var context = new SchoolCafeteriaDatabase();
             using var transaction = context.Database.BeginTransaction();
+
             try
             {
                 var techMap = new TechnologicalMap
@@ -47,6 +50,13 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
                     Description = model.Description
                 };
                 context.TechnologicalMaps.Add(techMap);
+                context.SaveChanges();
+
+                var goodsCompositions = context.GoodsCompositions
+                    .Where(rec => model.TechMapGoods.Contains(Convert.ToString(rec.GoodsId)))
+                    .ToList();
+
+                context.TechMapCompositions.Add(CreateTechMapCompositionModel(goodsCompositions, techMap.Id));
                 context.SaveChanges();
 
                 CreateModel(model, techMap, context);
@@ -150,6 +160,30 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
                 Description = techMap.Description,
                 TechMapGoods = list
             };
+        }
+
+        private static TechMapComposition CreateTechMapCompositionModel(List<GoodsComposition> goodsCompositions, int techMapId)
+        {
+            TechMapComposition techMapComposition = new TechMapComposition();
+
+            foreach(var goodsComposition in goodsCompositions) 
+            {
+                techMapComposition.Protein += goodsComposition.Protein;
+                techMapComposition.Fat += goodsComposition.Fat;
+                techMapComposition.Carb += goodsComposition.Carb;
+                techMapComposition.B1 += goodsComposition.B1;
+                techMapComposition.C += goodsComposition.C;
+                techMapComposition.A += goodsComposition.A;
+                techMapComposition.E += goodsComposition.E;
+                techMapComposition.Ca += goodsComposition.Ca;
+                techMapComposition.P += goodsComposition.P;
+                techMapComposition.Mg += goodsComposition.Mg;
+                techMapComposition.Fe += goodsComposition.Fe;
+            }
+
+            techMapComposition.TechnologicalMapId = techMapId;
+
+            return techMapComposition;
         }
     }
 }

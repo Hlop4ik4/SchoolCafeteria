@@ -18,10 +18,10 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
                 .ToList();
         }
 
-        public GoodsCompositionViewModel GetElement(int Id)
+        public GoodsCompositionViewModel GetElementByGoodsId(int Id)
         {
             using var context = new SchoolCafeteriaDatabase();
-            var goodsComposition = context.GoodsCompositions.FirstOrDefault(gc => gc.Id == Id);
+            var goodsComposition = context.GoodsCompositions.FirstOrDefault(gc => gc.GoodsId == Id);
             return goodsComposition != null ? CreateModel(goodsComposition) : null;
         }
 

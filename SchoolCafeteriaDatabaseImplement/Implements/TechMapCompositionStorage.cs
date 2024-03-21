@@ -19,10 +19,10 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
                 .ToList();
         }
 
-        public TechMapCompositionViewModel GetElement(int Id)
+        public TechMapCompositionViewModel GetElementByTechMapId(int Id)
         {
             using var context = new SchoolCafeteriaDatabase();
-            var techMapComposition = context.TechMapCompositions.FirstOrDefault(gc => gc.Id == Id);
+            var techMapComposition = context.TechMapCompositions.FirstOrDefault(gc => gc.TechnologicalMapId == Id);
             return techMapComposition != null ? CreateModel(techMapComposition) : null;
         }
 

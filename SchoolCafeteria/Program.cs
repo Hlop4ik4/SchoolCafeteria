@@ -87,6 +87,16 @@ app.MapGet("/Goods/Get", () =>
     .WithName("GoodsList")
     .WithOpenApi();
 
+app.MapGet("/Goods/Get/{id}", ([FromRoute] int id) =>
+{
+    var goodsStorage = new GoodsStorage();
+    var item = goodsStorage.GetElement(id);
+
+    return Results.Ok(item);
+})
+    .WithName("GoodsItem")
+    .WithOpenApi();
+
 app.MapPost("/Goods/Create", (GoodsViewModel request) =>
 {
     var goodsStorage = new GoodsStorage();
@@ -132,6 +142,16 @@ app.MapGet("/GoodsComposition/Get", () =>
     .WithName("GoodsCompositionList")
     .WithOpenApi();
 
+app.MapGet("/GoodsComposition/Get/{goodsid}", ([FromRoute] int goodsid) =>
+{
+    var goodsCompositionStorage = new GoodsCompositionStorage();
+    var item = goodsCompositionStorage.GetElementByGoodsId(goodsid);
+
+    return Results.Ok(item);
+})
+    .WithName("GoodsCompositionItem")
+    .WithOpenApi();
+
 app.MapPost("/GoodsComposition/Create", (GoodsCompositionViewModel request) =>
 {
     var goodsCompositionStorage = new GoodsCompositionStorage();
@@ -175,6 +195,16 @@ app.MapGet("/TechMapComposition/Get", () =>
     return Results.Ok(list);
 })
     .WithName("TechMapCompositionList")
+    .WithOpenApi();
+
+app.MapGet("/TechMapComposition/Get/{techmapid}", ([FromRoute] int techmapid) =>
+{
+    var techMapCompositionStorage = new TechMapCompositionStorage();
+    var item = techMapCompositionStorage.GetElementByTechMapId(techmapid);
+
+    return Results.Ok(item);
+})
+    .WithName("TechMapCompositionItem")
     .WithOpenApi();
 
 app.MapPost("/TechMapComposition/Create", (TechMapCompositionViewModel request) =>
