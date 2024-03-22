@@ -287,5 +287,115 @@ app.MapPost("/TechnologicalMaps/Delete", (TechnologicalMapViewModel request) =>
     .WithName("DeleteTechnologicalMap")
     .WithOpenApi();
 
+app.MapGet("/Dishes/Get", () =>
+{
+    var dishStorage = new DishStorage();
+    var list = dishStorage.GetFullList();
+
+    return Results.Ok(list);
+})
+    .WithName("DishList")
+    .WithOpenApi();
+
+app.MapGet("/Dishes/GetByOrder/{orderid}", ([FromRoute] int orderid) =>
+{
+    var dishStorage = new DishStorage();
+    var list = dishStorage.GetFilteredListByOrderId(orderid);
+
+    return Results.Ok(list);
+})
+    .WithName("DishFilteredList")
+    .WithOpenApi();
+
+app.MapGet("/Dishes/Get/{ids}", ([FromRoute] string ids) =>
+{
+    var dishStorage = new DishStorage();
+    var item = dishStorage.GetElementsByIds(ids);
+
+    return Results.Ok(item);
+})
+    .WithName("DishItem")
+    .WithOpenApi();
+
+app.MapPost("/Dishes/Create", (DishViewModel request) =>
+{
+    var dishStorage = new DishStorage();
+
+    dishStorage.Insert(request);
+
+    return Results.Ok();
+})
+    .WithName("CreateDish")
+    .WithOpenApi();
+
+app.MapPatch("/Dishes/Update", (DishViewModel request) =>
+{
+    var dishStorage = new DishStorage();
+
+    dishStorage.Update(request);
+
+    return Results.Ok();
+})
+    .WithName("UpdateDish")
+    .WithOpenApi();
+
+app.MapPost("/Dishes/Delete", (DishViewModel request) =>
+{
+    int idInt = Convert.ToInt32(request.Id);
+
+    var dishStorage = new DishStorage();
+
+    dishStorage.Delete(idInt);
+
+    return Results.Ok();
+})
+    .WithName("DeleteDish")
+    .WithOpenApi();
+
+app.MapGet("/Orders/Get", () =>
+{
+    var orderStorage = new OrderStorage();
+    var list = orderStorage.GetFullList();
+
+    return Results.Ok(list);
+})
+    .WithName("OrderList")
+    .WithOpenApi();
+
+app.MapPost("/Orders/Create", (OrderViewModel request) =>
+{
+    var orderStorage = new OrderStorage();
+
+    orderStorage.Insert(request);
+
+    return Results.Ok();
+})
+    .WithName("CreateOrder")
+    .WithOpenApi();
+
+app.MapPatch("/Orders/Update", (OrderViewModel request) =>
+{
+    var orderStorage = new OrderStorage();
+
+    orderStorage.Update(request);
+
+    return Results.Ok();
+})
+    .WithName("UpdateOrder")
+    .WithOpenApi();
+
+app.MapPost("/Orders/Delete", (OrderViewModel request) =>
+{
+    int idInt = Convert.ToInt32(request.Id);
+
+    var orderStorage = new OrderStorage();
+
+    orderStorage.Delete(idInt);
+
+    return Results.Ok();
+})
+    .WithName("DeleteOrder")
+    .WithOpenApi();
+
 app.Run();
 

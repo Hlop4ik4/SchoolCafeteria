@@ -21,6 +21,49 @@ namespace SchoolCafeteriaDatabaseImplement.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.Dish", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dishes");
+                });
+
+            modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.DishOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DishId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DishId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("DishOrders");
+                });
+
             modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.Goods", b =>
                 {
                     b.Property<int>("Id")
@@ -96,6 +139,25 @@ namespace SchoolCafeteriaDatabaseImplement.Migrations
                     b.HasIndex("GoodsId");
 
                     b.ToTable("GoodsCompositions");
+                });
+
+            modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SumToPay")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.TechMapComposition", b =>
@@ -225,6 +287,25 @@ namespace SchoolCafeteriaDatabaseImplement.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.DishOrder", b =>
+                {
+                    b.HasOne("SchoolCafeteriaDatabaseImplement.Models.Dish", "Dish")
+                        .WithMany("DishOrders")
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SchoolCafeteriaDatabaseImplement.Models.Order", "Order")
+                        .WithMany("DishOrders")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dish");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.GoodsComposition", b =>
                 {
                     b.HasOne("SchoolCafeteriaDatabaseImplement.Models.Goods", "Goods")
@@ -266,9 +347,19 @@ namespace SchoolCafeteriaDatabaseImplement.Migrations
                     b.Navigation("TechMap");
                 });
 
+            modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.Dish", b =>
+                {
+                    b.Navigation("DishOrders");
+                });
+
             modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.Goods", b =>
                 {
                     b.Navigation("TechMapGoods");
+                });
+
+            modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.Order", b =>
+                {
+                    b.Navigation("DishOrders");
                 });
 
             modelBuilder.Entity("SchoolCafeteriaDatabaseImplement.Models.TechnologicalMap", b =>

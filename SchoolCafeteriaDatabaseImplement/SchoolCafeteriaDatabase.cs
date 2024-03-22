@@ -30,5 +30,11 @@ namespace SchoolCafeteriaDatabaseImplement
         public virtual DbSet<TechnologicalMap> TechnologicalMaps { get; set; }
 
         public virtual DbSet<User> Users { get; set; }
+
+        public virtual DbSet<Dish> Dishes { get; set; }
+
+        public virtual DbSet<Order> Orders { get; set; }
+
+        public virtual DbSet<DishOrder> DishOrders { get; set; }
     }
 }
