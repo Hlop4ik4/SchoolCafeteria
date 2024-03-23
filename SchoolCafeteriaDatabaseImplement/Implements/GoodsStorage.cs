@@ -75,7 +75,7 @@ namespace SchoolCafeteriaDatabaseImplement.Implements
                 Name = goods.Name,
                 BruttoMass = Convert.ToString(goods.BruttoMass),
                 NettoMass = Convert.ToString(goods.NettoMass),
-                MarkToDelete = Convert.ToString(goods.MarkToDelete)
+                MarkToDelete = goods.MarkToDelete
             };
         }
 

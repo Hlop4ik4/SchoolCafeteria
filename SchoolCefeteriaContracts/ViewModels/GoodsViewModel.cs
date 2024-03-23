@@ -10,6 +10,6 @@
 
         public string NettoMass { get; set; }
 
-        public string MarkToDelete { get; set; }
+        public bool MarkToDelete { get; set; }
     }
 }
