@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TechMap>
+  <Id>1020</Id>
+  <DishName>Мешанина</DishName>
+  <RecipeNumber>2</RecipeNumber>
+  <CookingTechnology>Все смешать и в духовку</CookingTechnology>
+  <Description>На вкус лучше чем выглядит</Description>
+  <CreateDt>05.04.2024</CreateDt>
+  <Composition>
+    <Protein>4,00</Protein>
+    <Fat>14,00</Fat>
+    <Carb>45,00</Carb>
+    <B1>536,00</B1>
+    <C>17,00</C>
+    <A>425,00</A>
+    <E>46,00</E>
+    <Ca>57,00</Ca>
+    <P>27,00</P>
+    <Mg>14,00</Mg>
+    <Fe>343,00</Fe>
+  </Composition>
+  <TechMapGoods>
+    <Goods>
+      <Name>Картошка</Name>
+      <Brutto>100</Brutto>
+      <Netto>100</Netto>
+      <Brutto100>10000</Brutto100>
+      <Netto100>10000</Netto100>
+    </Goods>
+    <Goods>
+      <Name>Курица</Name>
+      <Brutto>100</Brutto>
+      <Netto>90</Netto>
+      <Brutto100>10000</Brutto100>
+      <Netto100>9000</Netto100>
+    </Goods>
+    <Goods>
+      <Name>Морковь</Name>
+      <Brutto>15</Brutto>
+      <Netto>15</Netto>
+      <Brutto100>1500</Brutto100>
+      <Netto100>1500</Netto100>
+    </Goods>
+  </TechMapGoods>
+</TechMap>

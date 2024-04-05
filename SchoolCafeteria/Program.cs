@@ -5,6 +5,9 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using SchoolCefeteriaContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using SchoolCafeteria.OfficePackage;
+using System.Xml.Linq;
+using System.Xml;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -287,5 +290,79 @@ app.MapPost("/TechnologicalMaps/Delete", (TechnologicalMapViewModel request) =>
     .WithName("DeleteTechnologicalMap")
     .WithOpenApi();
 
-app.Run();
+app.MapGet("/CreateDocument/{id}", ([FromRoute] int id) =>
+{
+    var technologicalMapStorage = new TechnologicalMapStorage();
+    var techMapCompositionStorage = new TechMapCompositionStorage();
+    var goodsStorage = new GoodsStorage();
 
+    var techMap = technologicalMapStorage.GetElement(id);
+    var techMapComposition = techMapCompositionStorage.GetElementByTechMapId(id);
+
+    List<GoodsViewModel> techMapGoods = new List<GoodsViewModel>();
+
+    foreach(var idString in techMap.TechMapGoods)
+    {
+        int idInt = Convert.ToInt32(idString);
+
+        var goods = goodsStorage.GetElement(idInt);
+
+        if(goods != null)
+        {
+            techMapGoods.Add(goods);
+        }
+    }
+
+    var xElement = new XElement("TechMap");
+
+    if (techMap != null && techMapComposition != null)
+    {
+        xElement.Add(new XElement("Id", techMap.Id),
+            new XElement("DishName", techMap.DishName),
+            new XElement("RecipeNumber", techMap.RecipeNumber),
+            new XElement("CookingTechnology", techMap.CookingTechnology),
+            new XElement("Description", techMap.Description),
+            new XElement("CreateDt", DateTime.Now.ToShortDateString()),
+            new XElement("Composition",
+                new XElement("Protein", techMapComposition.Protein),
+                new XElement("Fat", techMapComposition.Fat),
+                new XElement("Carb", techMapComposition.Carb),
+                new XElement("B1", techMapComposition.B1),
+                new XElement("C", techMapComposition.C),
+                new XElement("A", techMapComposition.A),
+                new XElement("E", techMapComposition.E),
+                new XElement("Ca", techMapComposition.Ca),
+                new XElement("P", techMapComposition.P),
+                new XElement("Mg", techMapComposition.Mg),
+                new XElement("Fe", techMapComposition.Fe)));
+
+        if(techMapGoods.Count > 0)
+        {
+            var techMapGoodsXElement = new XElement("TechMapGoods");
+
+            foreach(var goods in techMapGoods)
+            {
+                techMapGoodsXElement.Add(new XElement("Goods",
+                    new XElement("Name", goods.Name),
+                    new XElement("Brutto", goods.BruttoMass),
+                    new XElement("Netto", goods.NettoMass),
+                    new XElement("Brutto100", Convert.ToInt32(goods.BruttoMass) * 100),
+                    new XElement("Netto100", Convert.ToInt32(goods.NettoMass) * 100)));
+            }
+
+            xElement.Add(techMapGoodsXElement);
+        }
+    }
+
+    XDocument xDocument = new XDocument(xElement);
+
+    xDocument.Save("xmlDoc");
+
+    CreateWordDoc.CreteDocument();
+
+    return Results.File("шаблон.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "test.docx");
+})
+    .WithName("test")
+    .WithOpenApi();
+
+app.Run();
