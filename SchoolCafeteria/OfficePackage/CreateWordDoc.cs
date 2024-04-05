@@ -22,7 +22,7 @@ namespace SchoolCafeteria.OfficePackage
             XslCompiledTransform transform = new XslCompiledTransform();
             transform.Load("docXSL.xslt");
 
-            XmlReader reader = XmlReader.Create("xmlDoc");
+            XmlReader reader = XmlReader.Create("xmlDoc.xml");
 
             transform.Transform(reader, xmlWriter);
 

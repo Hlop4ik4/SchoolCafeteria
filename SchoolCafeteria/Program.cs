@@ -356,13 +356,13 @@ app.MapGet("/CreateDocument/{id}", ([FromRoute] int id) =>
 
     XDocument xDocument = new XDocument(xElement);
 
-    xDocument.Save("xmlDoc");
+    xDocument.Save("xmlDoc.xml");
 
     CreateWordDoc.CreteDocument();
 
-    return Results.File("шаблон.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "test.docx");
+    return Results.File(Path.Combine(app.Environment.ContentRootPath, "шаблон.docx"), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "test.docx");
 })
-    .WithName("test")
+    .WithName("CreateDocument")
     .WithOpenApi();
 
 app.Run();
